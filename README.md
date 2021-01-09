@@ -1,6 +1,7 @@
 # IA376J Final Project 
-Repository for models trained on DocVQA
+#Repository for models trained on DocVQA
 
+## Abstract
 Systems that use natural language processing architectures, such as BERT, have proven to be very effective in the question answering task. However, the Document Visual Question Answering (DocVQA) challenge focuses on the visual question answering task, in which a visual understanding of the information in a document image is necessary to provide an answer. Therefore, in order to accurately recognize the text fields of interest and obtain a good performance in the task, it is inevitable to take advantage of the multimodal nature of the documents, where the textual, visual and layout information must be modeled together and learned end to end in a single structure. This article explores the effectiveness of the T5, LayoutLM and EffficientNet models applied to the context of Visual Question Answering and also explores the feasibility of architectures formed from the combination of these models in task 1 of the DocVQA challenge. The experiments showed that T5 only and T5+EfficientNet have a reasonable performance for the proposed task, reaching a F1 Score up to 60 points, while T5+LayoutLM presented learning difficulties during training.
 
 ## DocVQA dataset
@@ -22,8 +23,8 @@ In 2019, Raffel et al. introduced a new model called “Text-to-Text Transfer Tr
 
 Using BERT-Base as a backbone and inspired by its architecture, the authors of LayoutLM added two types of input embeddings, a 2-D positional embedding and an image embedding. These extra embeddings were incorporated into the architecture because the first one can capture the relationship between tokens within a document, while the second one captures some appearance features, such as fonts, types, colors and represents these image attributes in a language representation.\newline
 LayoutLM was pre-trained on the IIT-CDIP Test Collection 1.0, which contains more than 6 million documents with 11 million document images in various categories. The authors used two tasks for pre-training:
-. **Masked Visual-Language Model:** consists of, during pre-training, randomly masking some of the input tokens, but maintaining the corresponding 2-D position embeddings and then training the model to predict the masked tokens. In this way, the model, in addition to understanding the language context, also uses the corresponding 2-D position information. newline
-. **Multi-label Document Classification:** Given a set of digitized documents, the authors used the document tags to supervise the pre-training process so that the model can group knowledge from different domains and generate a better representation at the document level. \newline
+* **Masked Visual-Language Model:** consists of, during pre-training, randomly masking some of the input tokens, but maintaining the corresponding 2-D position embeddings and then training the model to predict the masked tokens. In this way, the model, in addition to understanding the language context, also uses the corresponding 2-D position information. newline
+* **Multi-label Document Classification:** Given a set of digitized documents, the authors used the document tags to supervise the pre-training process so that the model can group knowledge from different domains and generate a better representation at the document level. \newline
 
 For the first time, the textual and image layout information of scanned documents were pre-trained in a single structure. This made the model obtain state-of-the-art performance in tasks of understanding images in documents and significantly surpassed several other text only pre-trained models.
 
