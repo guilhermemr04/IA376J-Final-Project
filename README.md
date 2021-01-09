@@ -1,5 +1,5 @@
 # IA376J Final Project 
-### Repository for models trained on DocVQA
+##### Repository for models trained on DocVQA
 
 ## Abstract
 Systems that use natural language processing architectures, such as BERT, have proven to be very effective in the question answering task. However, the Document Visual Question Answering (DocVQA) challenge focuses on the visual question answering task, in which a visual understanding of the information in a document image is necessary to provide an answer. Therefore, in order to accurately recognize the text fields of interest and obtain a good performance in the task, it is inevitable to take advantage of the multimodal nature of the documents, where the textual, visual and layout information must be modeled together and learned end to end in a single structure. This article explores the effectiveness of the T5, LayoutLM and EffficientNet models applied to the context of Visual Question Answering and also explores the feasibility of architectures formed from the combination of these models in task 1 of the DocVQA challenge. The experiments showed that T5 only and T5+EfficientNet have a reasonable performance for the proposed task, reaching a F1 Score up to 60 points, while T5+LayoutLM presented learning difficulties during training.
@@ -31,6 +31,19 @@ For the first time, the textual and image layout information of scanned document
 ### EfficientNet
 
 EfficientNeT is a model launched in 2019 by Google. The authors used Neural Architecture Search to build an efficient network architecture. The main building block of EfficientNet consists of MBConv, to which is added the compression and excitation optimization that form a shortcut connection between the beginning and the end of a convolutional block. Input activation maps are first expanded using 1x1 convolutions to increase the depth of resource maps. This is followed by 3x3 Depth-wise convolutions and Point-wise convolutions that reduce the number of channels on the output resource map. Shortcut connections connect the narrow layers, while the wider layers are present between the jump connections. This structure helps to decrease the overall number of operations required, as well as the size of the model. In order to improve accuracy and efficiency, the authors proposed a simple yet effective scaling technique, which uses a composite coefficient to uniformly dimension the width, depth and resolution of the network in a principled manner. In addition, all layers or stages in scale models use the same convolution operations as the baseline network called EfficientNet-b0. This technique allowed the authors to produce models that provided greater precision than existing convolutional networks, in addition to a monumental reduction in the number of FLOPS and the size of the model.
+
+## Experiments
+### T5 training
+
+The first experiment consisted of training two T5 models, the T5 model from Transformers library and a T5-Base pretrained on Natural Questions dataset. Both models received only textual information as input (question and document's context).
+
+### LayoutLM + T5 training
+
+For the second VQA experiment, I used an architecture composed of the LayoutLM and T5 models. The architecture receives as input the same textual information as the models of the previous experiment, together with the OCR position data provided by the dataset. All of these features are passed to LayoutLM, which creates an embedding representation, before moving on to T5, which is the model responsible for providing an answer to the question.
+
+### EfficientNet + T5
+
+At the third VQA experiment, I used an architecture composed of the EfficientNet and T5 models. The architecture receives as input the same textual information as the previous models, but this time it also receives the visual information from the scanned documents. In this implementation, visual embeddings go through CNN, while textual embeddings goes through the T5 encoder. At the end the two representations are concatenated and passed to the T5 decoder so that the model can provide an answer.
 
 ## References
 [1] Kwiatkowsk, T ., Palomaki , J., Redfield , O. (2019). Natural Questions: a Benchmark for Question Answering Research. Transactions of the Association of Computational Linguistics. <br />
