@@ -33,11 +33,11 @@ For the first time, the textual and image layout information of scanned document
 EfficientNeT is a model launched in 2019 by Google. The authors used Neural Architecture Search to build an efficient network architecture. The main building block of EfficientNet consists of MBConv, to which is added the compression and excitation optimization that form a shortcut connection between the beginning and the end of a convolutional block. Input activation maps are first expanded using 1x1 convolutions to increase the depth of resource maps. This is followed by 3x3 Depth-wise convolutions and Point-wise convolutions that reduce the number of channels on the output resource map. Shortcut connections connect the narrow layers, while the wider layers are present between the jump connections. This structure helps to decrease the overall number of operations required, as well as the size of the model. In order to improve accuracy and efficiency, the authors proposed a simple yet effective scaling technique, which uses a composite coefficient to uniformly dimension the width, depth and resolution of the network in a principled manner. In addition, all layers or stages in scale models use the same convolution operations as the baseline network called EfficientNet-b0. This technique allowed the authors to produce models that provided greater precision than existing convolutional networks, in addition to a monumental reduction in the number of FLOPS and the size of the model.
 
 ## Experiments
-### T5 training
+### T5 only
 
 The first experiment consisted of training two T5 models, the T5 model from Transformers library and a T5-Base pretrained on Natural Questions dataset. Both models received only textual information as input (question and document's context).
 
-### LayoutLM + T5 training
+### LayoutLM + T5 
 
 For the second VQA experiment, I used an architecture composed of the LayoutLM and T5 models. The architecture receives as input the same textual information as the models of the previous experiment, together with the OCR position data provided by the dataset. All of these features are passed to LayoutLM, which creates an embedding representation, before moving on to T5, which is the model responsible for providing an answer to the question.
 
